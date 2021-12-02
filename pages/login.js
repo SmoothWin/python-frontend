@@ -5,8 +5,8 @@ import { useEffect,useState } from 'react'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 
-// const getUrl = "https://pythontemperaturetracker.herokuapp.com/"
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
+const getUrl = "https://pythontemperaturetracker.herokuapp.com/login"
+// const mainUrl = "http://localhost:5000/login"
 
 export default function Login() {
     
