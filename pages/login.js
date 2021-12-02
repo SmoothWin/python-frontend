@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 import axios from 'axios'
 
 // const getUrl = "https://pythontemperaturetracker.herokuapp.com/"
-const mainUrl = "http://127.0.0.1:5000/login"
+const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
 
 export default function Login() {
     
