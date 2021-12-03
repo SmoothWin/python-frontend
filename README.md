@@ -1,3 +1,9 @@
+## Linked Repos:
+<a href="https://github.com/SmoothWin/PythonWebApp">Web App</a>
+<br/>
+<a href="https://github.com/SmoothWin/PythonTemperatureSensor">Temperature Sensor</a>
+<br/>
+# Next.Js
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
