@@ -18,7 +18,7 @@ export default function Home() {
   })
   useEffect(async () => {
     try{
-      let response = await axios.get(getUrl, {withCredentials: true})
+      let response = await axios.get(getUrl,{},{withCredentials: true})
       setData(response)
       console.log(response)
       if(response.request.responseURL.match(/\/login$/)){

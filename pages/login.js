@@ -31,11 +31,11 @@ export default function Login() {
     e.preventDefault()
     try{
         let response = await axios.post(mainUrl, {}, {
+          withCredentials: true,
             auth:{
                 username:name,
                 password:pass
             },
-            withCredentials: true
         })
         console.log(response)
         if(response.request.responseURL.match(/\/$/)){
