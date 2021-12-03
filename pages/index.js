@@ -31,7 +31,7 @@ export default function Home() {
   }, [isMounted])
 async function logout(){
   try{
-    let response = await axios.post(logoutUrl)
+    let response = await axios.post(logoutUrl, {}, {withCredentials:true})
   }catch(e){
     console.log()
   }
