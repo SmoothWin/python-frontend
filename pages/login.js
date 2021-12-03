@@ -5,8 +5,8 @@ import { useEffect,useState } from 'react'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
-// const mainUrl = "http://localhost:5000/login"
+// const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
+const mainUrl = "http://localhost:5000/login"
 
 export default function Login() {
     
@@ -30,12 +30,14 @@ export default function Login() {
   async function handleLogin(e){
     e.preventDefault()
     try{
-        let response = await axios.post(mainUrl, {withCredentials: true}, {
+        let response = await axios.post(mainUrl, {}, {
             auth:{
                 username:name,
                 password:pass
-            }
+            },
+            withCredentials: true
         })
+        console.log(response)
         if(response.request.responseURL.match(/\/$/)){
             router.push("/")
         }
