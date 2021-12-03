@@ -21,7 +21,7 @@ export default function Home() {
       let response = await axios.get(getUrl,{},{withCredentials: true})
       setData(response)
       console.log(response)
-      if(response.request.responseURL.match(/\/login$/)){
+      if(response.status == 201){
         router.push("/login")
       }
     }
