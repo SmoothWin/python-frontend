@@ -6,8 +6,8 @@ import axios from 'axios'
 
 import BootstrapJS from '../components/Bootstrap'
 
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
-// const mainUrl = "http://localhost:5000/login"
+// const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
+const mainUrl = "http://localhost:5000/login"
 
 export default function Login() {
     
@@ -18,13 +18,16 @@ export default function Login() {
 
   useEffect(async () => {
     setIsMounted(true)
-    try{
-      await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
-        withCredentials: true         //the cookie still exists when the jwt is still expired
-      })
-    }catch(e){
+    // try{
+    //   let response = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
+    //     withCredentials: true         //the cookie still exists when the jwt is still expired
+    //   })
+    //   console.log(response)
+    //   if(response.data.message == 'already authorized')
+    //   router.push('/')
+    // }catch(e){
       
-    }
+    // }
   }, [])
   useEffect(async () => {
   }, [isMounted])
@@ -70,4 +73,38 @@ export default function Login() {
     </div>
   )
   
+}
+
+export async function getServerSideProps({ req }) {
+  try{
+    const res = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
+      withCredentials: true,
+      headers:{
+        Cookie: req.headers?.cookie
+      }
+    })
+    console.log(res.status)
+    if(res.status == 200){
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      }
+    }
+
+    const data = await res.data;
+    // console.log(data)
+    if(data.message == "already authorized"){
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      }
+    }
+    return 
+  }catch(e){
+    return { props: { "no":"data" } }
+  }
 }
