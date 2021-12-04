@@ -62,12 +62,13 @@ export async function getServerSideProps({ req }) {
     const res = await axios.get(getUrl, {
         withCredentials: true,
         headers: {
-            Cookie: req.headers.cookie
+            Cookie: (typeof req.headers.cookie == 'undefined')?null:req.headers.cookie
         }
     });
     const data = await res.data;
     return { props: { data } }
   }catch(e){
+
     return {
       redirect: {
         destination: '/login',
