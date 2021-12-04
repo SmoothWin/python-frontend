@@ -1,11 +1,11 @@
 export default function BootstrapJS(){
     return(
         <>
-        <script defer src="jquery.min.js"></script>
+        <script async src="jquery.min.js"></script>
 
-        <script defer src="popper.min.js"></script>
+        <script async src="popper.min.js"></script>
 
-        <script defer src="bootstrap.min.js"></script>
+        <script async src="bootstrap.min.js"></script>
         </>
     )
 }
