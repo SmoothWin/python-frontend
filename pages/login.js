@@ -30,11 +30,7 @@ export default function Login() {
     }
   }, [])
   useEffect(async () => {
-    if(isMounted){
-      let response = await axios.get(mainUrl, {
-        withCredentials: true,
-      })
-    }
+    
   }, [isMounted])
   async function handleNameChange(e){
       setName(e.target.value)
