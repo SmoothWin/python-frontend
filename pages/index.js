@@ -68,7 +68,7 @@ export async function getServerSideProps({ req }) {
     const data = await res.data;
     return { props: { data } }
   }catch(e){
-
+    console.log(e)
     return {
       redirect: {
         destination: '/login',
