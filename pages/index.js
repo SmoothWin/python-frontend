@@ -58,6 +58,7 @@ export default function Home({data}) {
   
 }
 export async function getServerSideProps({ req }) {
+  console.log(req.headers.cookie)
   try{
     const res = await axios.get(getUrl, {
         withCredentials: true,
