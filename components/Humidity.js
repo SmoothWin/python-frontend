@@ -1,5 +1,5 @@
-export default function humidity(props)
+export default function Humidity(props)
 {
 
-    return (<h1> {props.humidityData.humidity} </h1> );
+    return (<span> {props.humidityData.humidity} </span> );
 }

@@ -1,5 +1,22 @@
+import axios from 'axios'
+import { useRouter } from 'next/router'
+
+const getUrl = "https://pythontemperaturetracker.herokuapp.com"
+// const getUrl = "http://localhost:5000"
+const logoutUrl = getUrl+"/logout"
+
 export default function navbar(props)
 {
+  const router = useRouter()
+
+  async function logout(){
+    try{
+      let response = await axios.post(logoutUrl, {}, {withCredentials:true})
+      router.push('/login')
+    }catch(e){
+      console.log(e)
+    }
+  }
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Navbar</a>
@@ -27,6 +44,8 @@ export default function navbar(props)
                 <a className="dropdown-item" href="#">Something else here</a>
               </div>
             </li>
+            
+            <button className="btn btn-outline-danger my-2 my-sm-0" onClick={logout}>Logout</button>
           </ul>
         </div>
       </nav>
