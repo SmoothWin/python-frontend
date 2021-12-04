@@ -30,6 +30,11 @@ export default function Login() {
     // }
   }, [])
   useEffect(async () => {
+    if(isMounted){
+      let response = await axios.get(mainUrl, {
+        withCredentials: true,
+      })
+    }
   }, [isMounted])
   async function handleNameChange(e){
       setName(e.target.value)
@@ -81,11 +86,11 @@ export async function getServerSideProps({ req }) {
     const res = await axios.post(mainUrl, {}, { 
       withCredentials: true,
       headers:{
-        Cookie: req.headers?.cookie
+        Cookie: (typeof req.headers?.cookie == "undefined")? null:req.headers?.cookie
         
       }
     })
-    console.log(res.status)
+    // console.log(res.status)
     if(res.status == 200){
       return {
         redirect: {
@@ -101,11 +106,11 @@ export async function getServerSideProps({ req }) {
       return {
         redirect: {
           destination: '/',
-          permanent: false,
+          permanent: true,
         },
       }
     }
-    return 
+    return {props :{"message": "redirected"}}
   }catch(e){
     console.log(e)
     return { props: { "no":"data" } }
