@@ -63,7 +63,7 @@ async function logout(){
       </Head>
       <Navbar/>
       <button onClick={logout}>Logout</button>
-      <p> {my_data?.map(humidity => <Humidity humidityData = {humidity}/>)}</p>
+      <p> {my_data?.map(humidity => <Humidity key={humidity.id} humidityData = {humidity}/>)}</p>
       
     </div>
   )
