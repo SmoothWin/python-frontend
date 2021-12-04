@@ -7,8 +7,8 @@ import axios from 'axios'
 import Humidity from '../components/Humidity'
 import Navbar from '../components/Navbar'
 
-// const getUrl = "https://pythontemperaturetracker.herokuapp.com"
-const getUrl = "http://localhost:5000"
+const getUrl = "https://pythontemperaturetracker.herokuapp.com"
+// const getUrl = "http://localhost:5000"
 const logoutUrl = getUrl+"/logout"
 
 export default function Home() {
