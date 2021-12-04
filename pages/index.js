@@ -11,8 +11,8 @@ import BootstrapJS from '../components/Bootstrap'
 import Temperature from '../components/Temperature'
 import Status from '../components/Status'
 
-const getUrl = "https://pythontemperaturetracker.herokuapp.com"
-// const getUrl = "http://localhost:5000"
+// const getUrl = "https://pythontemperaturetracker.herokuapp.com"
+const getUrl = "http://localhost:5000"
 
 export default function Home({data}) {
   const router = useRouter()

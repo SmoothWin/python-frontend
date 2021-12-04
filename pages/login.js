@@ -6,8 +6,8 @@ import axios from 'axios'
 
 import BootstrapJS from '../components/Bootstrap'
 
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
-// const mainUrl = "http://localhost:5000/login"
+// const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
+const mainUrl = "http://localhost:5000/login"
 
 export default function Login() {
     
@@ -76,11 +76,13 @@ export default function Login() {
 }
 
 export async function getServerSideProps({ req }) {
+  console.log(req.headers)
   try{
-    const res = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
+    const res = await axios.post(mainUrl, {}, { 
       withCredentials: true,
       headers:{
         Cookie: req.headers?.cookie
+        
       }
     })
     console.log(res.status)
@@ -105,6 +107,7 @@ export async function getServerSideProps({ req }) {
     }
     return 
   }catch(e){
+    console.log(e)
     return { props: { "no":"data" } }
   }
 }
