@@ -18,16 +18,16 @@ export default function Login() {
 
   useEffect(async () => {
     setIsMounted(true)
-    // try{
-    //   let response = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
-    //     withCredentials: true         //the cookie still exists when the jwt is still expired
-    //   })
-    //   console.log(response)
-    //   if(response.data.message == 'already authorized')
-    //   router.push('/')
-    // }catch(e){
+    try{
+      let response = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
+        withCredentials: true         //the cookie still exists when the jwt is still expired
+      })
+      console.log(response)
+      if(response.data.message == 'already authorized')
+      router.push('/')
+    }catch(e){
       
-    // }
+    }
   }, [])
   useEffect(async () => {
     if(isMounted){
@@ -80,39 +80,39 @@ export default function Login() {
   
 }
 
-export async function getServerSideProps({ req }) {
-  console.log(req.headers)
-  try{
-    const res = await axios.post(mainUrl, {}, { 
-      withCredentials: true,
-      headers:{
-        Cookie: (typeof req.headers?.cookie == "undefined")? null:req.headers?.cookie
+// export async function getServerSideProps({ req }) {
+//   console.log(req.headers)
+//   try{
+//     const res = await axios.post(mainUrl, {}, { 
+//       withCredentials: true,
+//       headers:{
+//         Cookie: (typeof req.headers?.cookie == "undefined")? null:req.headers?.cookie
         
-      }
-    })
-    // console.log(res.status)
-    if(res.status == 200){
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
+//       }
+//     })
+//     // console.log(res.status)
+//     if(res.status == 200){
+//       return {
+//         redirect: {
+//           destination: '/',
+//           permanent: false,
+//         },
+//       }
+//     }
 
-    const data = await res.data;
-    // console.log(data)
-    if(data.message == "already authorized"){
-      return {
-        redirect: {
-          destination: '/',
-          permanent: true,
-        },
-      }
-    }
-    return {props :{"message": "redirected"}}
-  }catch(e){
-    console.log(e)
-    return { props: { "no":"data" } }
-  }
-}
+//     const data = await res.data;
+//     // console.log(data)
+//     if(data.message == "already authorized"){
+//       return {
+//         redirect: {
+//           destination: '/',
+//           permanent: true,
+//         },
+//       }
+//     }
+//     return {props :{"message": "redirected"}}
+//   }catch(e){
+//     console.log(e)
+//     return { props: { "no":"data" } }
+//   }
+// }
