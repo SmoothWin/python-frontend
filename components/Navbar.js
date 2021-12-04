@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import {url} from '../constants/urls'
 
-const getUrl = "https://pythontemperaturetracker.herokuapp.com"
-// const getUrl = "http://localhost:5000"
+const getUrl = url
 const logoutUrl = getUrl+"/logout"
 
 export default function Navbar(props)

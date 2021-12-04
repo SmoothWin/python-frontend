@@ -11,16 +11,29 @@ import BootstrapJS from '../components/Bootstrap'
 import Temperature from '../components/Temperature'
 import Status from '../components/Status'
 
-const getUrl = "https://pythontemperaturetracker.herokuapp.com"
-// const getUrl = "http://localhost:5000"
+import {url} from '../constants/urls'
 
-export default function Home({data}) {
+const getUrl = url
+
+export default function Home() {
   const router = useRouter()
   const [isMounted, setIsMounted] = useState(false)
-  // const [data, setData] = useState(null)
+  const [data, setData] = useState(null)
   // const [loggedIn, setLoggedIn] = useState(false)
+  async function getData(){
+    try{
+      let res = await axios.get(getUrl, {
+          withCredentials: true,
+      });
+      let dataResponse = await res.data;
+      setData(dataResponse)
+    }catch(e){
+      console.log(e)
+      router.push("/login")
+    }
+  }
   useEffect(async () => {
-      // await getData();
+    await getData();
     setIsMounted(true)
   },[])
   useEffect(async () => 
@@ -47,34 +60,14 @@ export default function Home({data}) {
       </Head>
       <Navbar/>
       <h2>Humidity</h2>
-      <p> {h_data.map(humidity => <Humidity key={humidity.id} humidityData = {humidity}/>)}</p>
+      <p> {h_data?.map(humidity => <Humidity key={humidity.id} humidityData = {humidity}/>)}</p>
       <h2>Temperature</h2>
-      <p> {t_data.map(temperature => <Temperature key={temperature.id} temperatureData = {temperature}/>)}</p>
+      <p> {t_data?.map(temperature => <Temperature key={temperature.id} temperatureData = {temperature}/>)}</p>
       <h2>Status</h2>
-      <p> {s_data.map(status => <Status key={status.id} statusData = {status}/>)}</p>
+      <p> {s_data?.map(status => <Status key={status.id} statusData = {status}/>)}</p>
       
     </div>
   )
   
 }
-export async function getServerSideProps({ req }) {
-  console.log(req.headers['set-cookie'])
-  try{
-    const res = await axios.get(getUrl, {
-        withCredentials: true,
-        headers: {
-            Cookie: (typeof req.headers.cookie == 'undefined')?null:req.headers.cookie
-        }
-    });
-    const data = await res.data;
-    return { props: { data } }
-  }catch(e){
-    console.log(e)
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-}
+

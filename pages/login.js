@@ -3,11 +3,11 @@ import { useRouter } from 'next/router'
 import { useEffect,useState } from 'react'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
+import {url} from '../constants/urls'
 
 import BootstrapJS from '../components/Bootstrap'
 
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
-// const mainUrl = "http://localhost:5000/login"
+const mainUrl = url+'/login'
 
 export default function Login() {
     
@@ -75,40 +75,3 @@ export default function Login() {
   )
   
 }
-
-// export async function getServerSideProps({ req }) {
-//   console.log(req.headers)
-//   try{
-//     const res = await axios.post(mainUrl, {}, { 
-//       withCredentials: true,
-//       headers:{
-//         Cookie: (typeof req.headers?.cookie == "undefined")? null:req.headers?.cookie
-        
-//       }
-//     })
-//     // console.log(res.status)
-//     if(res.status == 200){
-//       return {
-//         redirect: {
-//           destination: '/',
-//           permanent: false,
-//         },
-//       }
-//     }
-
-//     const data = await res.data;
-//     // console.log(data)
-//     if(data.message == "already authorized"){
-//       return {
-//         redirect: {
-//           destination: '/',
-//           permanent: true,
-//         },
-//       }
-//     }
-//     return {props :{"message": "redirected"}}
-//   }catch(e){
-//     console.log(e)
-//     return { props: { "no":"data" } }
-//   }
-// }
