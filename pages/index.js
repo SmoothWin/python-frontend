@@ -51,6 +51,7 @@ async function logout(){
   let my_data = null;
   if(data != null)
   {
+    
     my_data = data.humidities
     console.log(my_data);
   } 
