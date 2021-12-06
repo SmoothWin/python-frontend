@@ -114,3 +114,16 @@
     flex-direction: column;
   }
 }
+
+.aboutContainer
+{
+  margin-top: 100px;
+}
+.myImg
+{
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border: 1px solid;
+  padding: 1px;
+  box-shadow: 5px 10px;
+}
