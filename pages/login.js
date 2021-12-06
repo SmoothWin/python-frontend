@@ -67,7 +67,7 @@ export default function Login() {
      <br/><br/>
      <div className="wrapper fadeInDown container">
     <div id="formContent" className="row justify-content-center align-items-center text-center">
-       <form onSubmit={handleLogin} className="form col-3">
+       <form onSubmit={handleLogin} className="form col-12 col-sm-8">
              <div className="form-group">
            <label className="text-center input-group-text">Username</label>
            <input id="login" className="fadeIn second form-control" onChange={handleNameChange} type="text"/>
