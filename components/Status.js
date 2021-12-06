@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 export default function Status(props)
 {
     
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     useEffect(() => {
         const ctx = document.getElementById('myChartStat');
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const myChartStat = new Chart(ctx, {
+        new Chart(ctx, {
             type: 'bar',
             data: {
 
@@ -44,8 +44,30 @@ export default function Status(props)
 
     }, [])
 
+    function getMonthList(){
+        let arrayMonth = props.statusData.map(element => new Date(element.date_time).getMonth())
+        let set = new Set(arrayMonth)
+        return Array.from(set)
+    }
+    function getOnMonth(month){
+        let arrayOfMonthStat = props.statusData.filter(element = new Date(element.date_time).getMonth() == month)
+        
+        return arrayOfMonthStat
+    }
+
+    let optionSelect = null;
+    if(props.statusData != null){
+        optionSelect = 
+        <select>
+            <option value={-1}>All</option>
+            {getMonthList().map(item => <option value={item}>{monthNames[item]}</option>)}
+        </select>
+    }
+
     return (
+        <>
+        {optionSelect}
         <canvas id="myChartStat" width="200" height="200"></canvas>
-        // {/* <span> {props.humidityData.humidity} </span></>  */}
+        </>
     );
 }
