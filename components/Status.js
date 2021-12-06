@@ -139,7 +139,7 @@ export default function Status(props)
         optionSelect = 
         <select id="statusSelect" onChange={changeMonth}>
             <option value={-1}>All</option>
-            {getMonthList().map(item => <option value={item}>{monthNames[item]}</option>)}
+            {getMonthList().map(item => <option key={item.id} value={item}>{monthNames[item]}</option>)}
         </select>
     }
 
