@@ -99,7 +99,7 @@ export default function Humidity(props) {
                 labels: arrayOfMonthHum.map(element => monthNames[new Date(element.date_time).getMonth()] + " " + new Date(element.date_time).getDate() + " " + new Date(element.date_time).getFullYear()),
                 datasets: [{
                     label: 'Humidity %',
-                    data: arrayOfMonthHum.map(element => element.humidity),
+                    data: arrayOfMonthHum.map(element => element.humidity * 100),
 
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -136,7 +136,7 @@ export default function Humidity(props) {
             }
         });
     }
-    function changeMonth(e){
+    function changeMonth(){
         let select = document.getElementById("humiditySelect")?.value;
         getOnMonth(select)
     }
@@ -156,7 +156,6 @@ export default function Humidity(props) {
         <>
         {optionSelect}
         <canvas id="myChartHumid" width="200" height="200"></canvas>
-        {/* <span> {props.humidityData.humidity} </span></>  */}
         </>
     );
 }

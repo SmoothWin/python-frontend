@@ -136,7 +136,7 @@ export default function Temperature(props) {
         });
     }
 
-    function changeMonth(e){
+    function changeMonth(){
         let select = document.getElementById("temperatureSelect")?.value;
         getOnMonth(select)
     }
