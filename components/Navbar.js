@@ -2,6 +2,9 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { url } from '../constants/urls'
 import Link from 'next/link'
+import Humidity from './Humidity'
+import Temperature from './Temperature'
+import Status from './Status'
 const getUrl = url
 const logoutUrl = getUrl + "/logout"
 
