@@ -4,12 +4,12 @@ import { useEffect,useState } from 'react'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {url} from '../constants/urls'
 
 import BootstrapJS from '../components/Bootstrap'
 import head from 'next/head'
 
-const mainUrl = "https://pythontemperaturetracker.herokuapp.com/login"
-// const mainUrl = "http://localhost:5000/login"
+const mainUrl = url+'/login'
 
 export default function Login() {
     
@@ -20,18 +20,19 @@ export default function Login() {
 
   useEffect(async () => {
     setIsMounted(true)
-    // try{
-    //   let response = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
-    //     withCredentials: true         //the cookie still exists when the jwt is still expired
-    //   })
-    //   console.log(response)
-    //   if(response.data.message == 'already authorized')
-    //   router.push('/')
-    // }catch(e){
+    try{
+      let response = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
+        withCredentials: true         //the cookie still exists when the jwt is still expired
+      })
+      console.log(response)
+      if(response.data.message == 'already authorized')
+      router.push('/')
+    }catch(e){
       
-    // }
+    }
   }, [])
   useEffect(async () => {
+    
   }, [isMounted])
   async function handleNameChange(e){
       setName(e.target.value)
@@ -89,42 +90,5 @@ export default function Login() {
    </div>
   </div>
  </div>
- 
-
   )
-  
-}
-
-export async function getServerSideProps({ req }) {
-  try{
-    const res = await axios.post(mainUrl, {}, { //done in order to remove the auth cookie if 
-      withCredentials: true,
-      headers:{
-        Cookie: req.headers?.cookie
-      }
-    })
-    console.log(res.status)
-     if(res.status == 200){
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
-
-    const data = await res.data;
-    // console.log(data)
-    if(data.message == "already authorized"){
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      }
-    }
-    return 
-  }catch(e){
-    return { props: { "no":"data" } }
-  }
 }
