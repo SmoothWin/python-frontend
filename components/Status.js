@@ -116,7 +116,7 @@ export default function Status(props)
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Status (daily)',
+                        text: `Status ${monthNames[month]} (Daily)`,
 
                     }
                 },

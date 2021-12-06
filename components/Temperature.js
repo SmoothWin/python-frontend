@@ -39,7 +39,7 @@ export default function Temperature(props) {
 
                 labels: arrofAvg.map(x => x.day),
                 datasets: [{
-                    label: 'Temperature C',
+                    label: 'Temperature (C°)',
                     data: arrofAvg.map(x => x.dayAvg),
 
                     backgroundColor: [
@@ -97,7 +97,7 @@ export default function Temperature(props) {
 
                 labels: arrayOfMonthTemp.map(element => monthNames[new Date(element.date_time).getMonth()] + " " + new Date(element.date_time).getDate() + " " + new Date(element.date_time).getFullYear()),
                 datasets: [{
-                    label: 'Temperature Celsius',
+                    label: 'Temperature (C°)',
                     data: arrayOfMonthTemp.map(element => element.temperature),
 
                     backgroundColor: [
