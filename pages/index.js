@@ -43,14 +43,22 @@ export default function Home() {
   let h_data = null;
   let t_data = null;
   let s_data = null;
+  let humidityChart = null;
+  let temperatureChart = null;
+  let statusChart = null;
   if(data != null)
   {
     h_data = data.humidities
     t_data = data.temperatures
     s_data = data.status
+    humidityChart = <Humidity humidityData = {data.humidities}/>
+    temperatureChart =  <Temperature temperatureData = {data.temperatures}/>
+    statusChart = <Status statusData = {data.status}/>
   } 
   // console.log(data)
+  
   return (
+    
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -59,13 +67,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar/>
-      <h2>Humidity</h2>
-      <p> {h_data?.map(humidity => <Humidity key={humidity.id} humidityData = {humidity}/>)}</p>
-      <h2>Temperature</h2>
-      <p> {t_data?.map(temperature => <Temperature key={temperature.id} temperatureData = {temperature}/>)}</p>
-      <h2>Status</h2>
-      <p> {s_data?.map(status => <Status key={status.id} statusData = {status}/>)}</p>
-      
+      {humidityChart}
+      {temperatureChart}
+      {statusChart}
     </div>
   )
   
