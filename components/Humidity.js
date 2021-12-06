@@ -148,7 +148,7 @@ export default function Humidity(props) {
         optionSelect = 
         <select id="humiditySelect" onChange={changeMonth}>
             <option value={-1}>All</option>
-            {getMonthList().map(item => <option value={item}>{monthNames[item]}</option>)}
+            {getMonthList().map(item => <option key={item.id} value={item}>{monthNames[item]}</option>)}
         </select>
     }
 
