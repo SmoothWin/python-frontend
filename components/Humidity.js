@@ -91,7 +91,7 @@ export default function Humidity(props) {
         }
         const ctx = document.getElementById('myChartHumid');
         let arrayOfMonthHum = props.humidityData.filter(element => new Date(element.date_time).getMonth() == month)
-        console.log(arrayOfMonthHum.map(element => element.humidity))
+        // console.log(arrayOfMonthHum.map(element => element.humidity))
         chart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -148,7 +148,7 @@ export default function Humidity(props) {
         optionSelect = 
         <select id="humiditySelect" onChange={changeMonth}>
             <option value={-1}>All</option>
-            {getMonthList().map(item => <option key={item.id} value={item}>{monthNames[item]}</option>)}
+            {getMonthList().map(item => <option key={item} value={item}>{monthNames[item]}</option>)}
         </select>
     }
 

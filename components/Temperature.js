@@ -6,7 +6,7 @@ let chart;
 export default function Temperature(props) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     function getAvgForDay() {
-        console.log(props.temperatureData)
+        // console.log(props.temperatureData)
         let prevDay = props.temperatureData.map(x => new Date(x.date_time).getDate())
         prevDay = prevDay[0]
         const arrofAvg = []
@@ -90,7 +90,7 @@ export default function Temperature(props) {
         }
         const ctx = document.getElementById('myChartTemp');
         let arrayOfMonthTemp = props.temperatureData.filter(element => new Date(element.date_time).getMonth() == month)
-        console.log(arrayOfMonthTemp.map(element => element.temperature))
+        // console.log(arrayOfMonthTemp.map(element => element.temperature))
         chart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -149,7 +149,7 @@ export default function Temperature(props) {
         optionSelect = 
         <select id="temperatureSelect" onChange={changeMonth}>
             <option value={-1}>All</option>
-            {getMonthList().map(item => <option key={item.id} value={item}>{monthNames[item]}</option>)}
+            {getMonthList().map(item => <option key={item} value={item}>{monthNames[item]}</option>)}
         </select>
     }
 

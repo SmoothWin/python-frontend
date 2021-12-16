@@ -19,46 +19,99 @@ export default function Home() {
   const router = useRouter()
   const [isMounted, setIsMounted] = useState(false)
   const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [selectedPi, setSelectedPi] = useState(0)
   // const [loggedIn, setLoggedIn] = useState(false)
-  async function getData(){
+  async function getData(piIndex = 0){
     try{
+      setLoading(true)
+      setData(null)
+      let pi = await axios.get(getUrl+"/api/pies", {withCredentials:true});
+      console.log(pi.data)
+      if(piIndex > pi.data.pies.length - 1){
+        let res = await axios.get(getUrl, {
+          withCredentials: true,
+          headers:{'Content-Type': 'application/json',},
+          params:{pi:pi.data.pies[0]?.pi_id}
+      });
+      let dataResponse = res.data;
+      setData([dataResponse, pi.data.pies])
+      setSelectedPi(piIndex)
+      return
+      }
       let res = await axios.get(getUrl, {
           withCredentials: true,
+          headers:{'Content-Type': 'application/json',},
+          params:{pi:pi.data.pies[piIndex]?.pi_id}
       });
-      let dataResponse = await res.data;
-      setData(dataResponse)
+      let dataResponse = res.data;
+      console.log(pi.data.pies[0]?.pi_id)
+      setData([dataResponse, pi.data.pies])
+      setSelectedPi(piIndex)
     }catch(e){
       console.log(e)
       router.push("/login")
+    } finally{
+      setLoading(false)
     }
   }
   useEffect(async () => {
-    await getData();
     setIsMounted(true)
   },[])
   useEffect(async () => 
   {
+    if(isMounted == true)
+      await getData();
   }, [isMounted])
+
+  async function changePi(){
+    let select = document.getElementById("piSelect")?.value;
+    await getData(select)
+  }
 
   let h_data = null;
   let t_data = null;
   let s_data = null;
+  let pi_data = null;
   let humidityChart = null;
   let temperatureChart = null;
   let statusChart = null;
+  let selectPi = null;
+  let loader = null;
   if(data != null)
   {
-    h_data = data.humidities
-    t_data = data.temperatures
-    s_data = data.status
-    humidityChart = <Humidity humidityData = {data.humidities}/>
-    temperatureChart =  <Temperature temperatureData = {data.temperatures}/>
-    statusChart = <Status statusData = {data.status}/>
+    console.log(data[1][0].pi_id)
+    h_data = data[0].humidities
+    t_data = data[0].temperatures
+    s_data = data[0].status
+    pi_data = data[1]
+    selectPi = <><label>Pies: &nbsp;</label><br/>
+    <select id="piSelect" value={selectedPi} onChange={changePi}>
+    {pi_data.map((pi, index)=><option key={pi.pi_id} value={index}>{pi.pi_id}</option>)}
+    </select><br/></>
+    humidityChart = <Humidity humidityData = {h_data}/>
+    temperatureChart =  <Temperature temperatureData = {t_data}/>
+    statusChart = <Status statusData = {s_data}/>
   } 
   // console.log(data)
-  
+  if(loading){
+    loader = 
+    <div className="text-center mt-auto mb-auto bg-primary" style={{zIndex:300000,position:"absolute",width:  "100%", height: "100vh"}}>
+    <div className="spinner-grow text-danger mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+      <span class="sr-only"></span>
+    </div>
+    <div className="spinner-grow text-warning mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+      <span class="sr-only"></span>
+    </div>
+    <div className="spinner-grow text-success mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+      <span class="sr-only"></span>
+    </div>
+    </div>
+  }
   return (
+    <>
     
+    {loader}
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -67,10 +120,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar/>
+      
+      {selectPi}
+      <br/>
       {humidityChart}
       {temperatureChart}
       {statusChart}
     </div>
+    </>
   )
   
 }
