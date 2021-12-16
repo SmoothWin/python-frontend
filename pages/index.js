@@ -98,13 +98,13 @@ export default function Home() {
     loader = 
     <div className="text-center mt-auto mb-auto bg-primary" style={{zIndex:300000,position:"absolute",width:  "100%", height: "100vh"}}>
     <div className="spinner-grow text-danger mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
-      <span class="sr-only"></span>
+      <span className="sr-only"></span>
     </div>
     <div className="spinner-grow text-warning mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
-      <span class="sr-only"></span>
+      <span clasName="sr-only"></span>
     </div>
     <div className="spinner-grow text-success mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
-      <span class="sr-only"></span>
+      <span className="sr-only"></span>
     </div>
     </div>
   }
