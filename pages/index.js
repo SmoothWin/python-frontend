@@ -96,14 +96,14 @@ export default function Home() {
   // console.log(data)
   if(loading){
     loader = 
-    <div className="text-center mt-auto mb-auto bg-primary" style={{zIndex:300000,position:"absolute",width:  "100%", height: "100vh"}}>
-    <div className="spinner-grow text-danger mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+    <div className="text-center mt-auto mb-auto bg-primary" style={{zIndex:300000,position:"absolute", display:"flex", justifyContent:"center", alignItems:"center",width:  "100%", height: "100%"}}>
+    <div className="spinner-grow text-danger mx-2" style={{width:  70, height: 70}} role="status">
       <span className="sr-only"></span>
     </div>
-    <div className="spinner-grow text-warning mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+    <div className="spinner-grow text-warning mx-2" style={{width:  70, height: 70}} role="status">
       <span clasName="sr-only"></span>
     </div>
-    <div className="spinner-grow text-success mx-2" style={{width:  70, height: 70, marginTop:"50%",marginBottom:"auto"}} role="status">
+    <div className="spinner-grow text-success mx-2" style={{width:  70, height: 70}} role="status">
       <span className="sr-only"></span>
     </div>
     </div>
