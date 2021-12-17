@@ -6,7 +6,7 @@ import '../styles/navStyle.scss'
 
 function MyApp({ Component, pageProps })
 {
-
+  
   return <Component  {...pageProps} />
 }
 

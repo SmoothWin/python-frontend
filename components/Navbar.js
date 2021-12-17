@@ -10,7 +10,6 @@ const logoutUrl = getUrl + "/logout"
 
 export default function Navbar(props) {
   const router = useRouter()
-  let data = props.data
   async function logout() {
     try {
       let response = await axios.post(logoutUrl, {}, { withCredentials: true })
@@ -19,20 +18,8 @@ export default function Navbar(props) {
       console.log(e)
     }
   }
-  let h_data = null;
-  let t_data = null;
-  let s_data = null;
-  let humidityChart = null;
-  let temperatureChart = null;
-  let statusChart = null;
-  if (data != null) {
-    h_data = data.humidities
-    t_data = data.temperatures
-    s_data = data.status
-    humidityChart = <Humidity humidityData={data.humidities} />
-    temperatureChart = <Temperature temperatureData={data.temperatures} />
-    statusChart = <Status statusData={data.status} />
-  }
+  
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">
